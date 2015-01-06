@@ -7,8 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "OverLayView.h"
+#import "MultiFunctionCell.h"
 
-@interface MultiFunctionTableView : UITableView
+@interface MultiFunctionTableView : UITableView <OverLayViewDelegate,MultiFunctionCellActionDelegate>
 
 - (instancetype)initWithFrame:(CGRect)frame style:(UITableViewStyle)style;
 
