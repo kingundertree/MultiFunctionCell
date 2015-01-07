@@ -15,6 +15,17 @@
 
 #define CellMenuWidth 80.0
 
+NSUInteger DeviceSystemMajorVersion()
+{
+    static NSUInteger _deviceSystemMajorVersion = -1;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        _deviceSystemMajorVersion = [[[[[UIDevice currentDevice] systemVersion] componentsSeparatedByString:@"."] objectAtIndex:0] intValue];
+    });
+    return _deviceSystemMajorVersion;
+}
+#define IsSystemVersionOverSeven (DeviceSystemMajorVersion() >= 7)
+
 
 @interface MultiFunctionCell () <UIGestureRecognizerDelegate>
 @property (nonatomic, assign) float startX;
@@ -146,31 +157,63 @@
     __block MultiFunctionCell *this = self;
     if (cellX <= 10 && cellX >= -10) {
         self.isMoving = YES;
-        [UIView animateWithDuration:0.2 animations:^{
-            this.cellContentView.frame = CGRectMake(0, 0, ScreenWidth, this.cellHeight);
-        } completion:^(BOOL finished) {
-            self.isMoving = NO;
-            this.cellStauts = MultiFunctionCellTypeForNormal;
-            [self.cellActionDelegate tableMenuDidHideInCell:self];
-        }];
+        
+        if (IsSystemVersionOverSeven) {
+            [UIView animateWithDuration:0.4f delay:0.0f usingSpringWithDamping:1.0f initialSpringVelocity:0.0f options:UIViewAnimationOptionAllowAnimatedContent animations:^{
+                this.cellContentView.frame = CGRectMake(0, 0, ScreenWidth, this.cellHeight);
+            } completion:^(BOOL finished) {
+                self.isMoving = NO;
+                this.cellStauts = MultiFunctionCellTypeForNormal;
+                [self.cellActionDelegate tableMenuDidHideInCell:self];
+            }];
+        } else {
+            [UIView animateWithDuration:0.4 animations:^{
+                this.cellContentView.frame = CGRectMake(0, 0, ScreenWidth, this.cellHeight);
+            } completion:^(BOOL finished) {
+                self.isMoving = NO;
+                this.cellStauts = MultiFunctionCellTypeForNormal;
+                [self.cellActionDelegate tableMenuDidHideInCell:self];
+            }];
+        }
     } else if ( cellX > 10) {
         self.isMoving = YES;
-        [UIView animateWithDuration:0.2 animations:^{
-            this.cellContentView.frame = CGRectMake(self.leftMenus.count*CellMenuWidth, 0, ScreenWidth, this.cellHeight);
-        } completion:^(BOOL finished) {
-            self.isMoving = NO;
-            this.cellStauts = MultiFunctionCellTypeForLeftMenu;
-            [self.cellActionDelegate tableMenuDidShowInCell:self];
-        }];
+        if (IsSystemVersionOverSeven >= 7.0) {
+            [UIView animateWithDuration:0.4f delay:0.0f usingSpringWithDamping:1.0f initialSpringVelocity:0.0f options:UIViewAnimationOptionAllowAnimatedContent animations:^{
+                this.cellContentView.frame = CGRectMake(self.leftMenus.count*CellMenuWidth, 0, ScreenWidth, this.cellHeight);
+            } completion:^(BOOL finished) {
+                self.isMoving = NO;
+                this.cellStauts = MultiFunctionCellTypeForLeftMenu;
+                [self.cellActionDelegate tableMenuDidShowInCell:self];
+            }];
+        } else {
+            [UIView animateWithDuration:0.4 animations:^{
+                this.cellContentView.frame = CGRectMake(self.leftMenus.count*CellMenuWidth, 0, ScreenWidth, this.cellHeight);
+            } completion:^(BOOL finished) {
+                self.isMoving = NO;
+                this.cellStauts = MultiFunctionCellTypeForLeftMenu;
+                [self.cellActionDelegate tableMenuDidShowInCell:self];
+            }];
+        }
     } else if (cellX < -10) {
         self.isMoving = YES;
-        [UIView animateWithDuration:0.2 animations:^{
-            this.cellContentView.frame = CGRectMake(0.0-self.rightMenus.count*CellMenuWidth, 0, ScreenWidth, this.cellHeight);
-        } completion:^(BOOL finished) {
-            self.isMoving = NO;
-            this.cellStauts = MultiFunctionCellTypeForRightMenu;
-            [self.cellActionDelegate tableMenuDidShowInCell:self];
-        }];
+        
+        if (IsSystemVersionOverSeven >= 7.0) {
+            [UIView animateWithDuration:0.4f delay:0.0f usingSpringWithDamping:1.0f initialSpringVelocity:0.0f options:UIViewAnimationOptionAllowAnimatedContent animations:^{
+                this.cellContentView.frame = CGRectMake(0.0-self.rightMenus.count*CellMenuWidth, 0, ScreenWidth, this.cellHeight);
+            } completion:^(BOOL finished) {
+                self.isMoving = NO;
+                this.cellStauts = MultiFunctionCellTypeForRightMenu;
+                [self.cellActionDelegate tableMenuDidShowInCell:self];
+            }];
+        } else {
+            [UIView animateWithDuration:0.2 animations:^{
+                this.cellContentView.frame = CGRectMake(0.0-self.rightMenus.count*CellMenuWidth, 0, ScreenWidth, this.cellHeight);
+            } completion:^(BOOL finished) {
+                self.isMoving = NO;
+                this.cellStauts = MultiFunctionCellTypeForRightMenu;
+                [self.cellActionDelegate tableMenuDidShowInCell:self];
+            }];
+        }
     }
 }
 
@@ -181,14 +224,27 @@
     if (hidden) {
         CGRect frame = self.cellContentView.frame;
         if (frame.origin.x != 0) {
-            [UIView animateWithDuration:0.2 animations:^{
-                [self initCellFrame:0];
-            } completion:^(BOOL finished) {
-                [self.cellActionDelegate tableMenuDidHideInCell:self];
-                if (completionHandler) {
-                    completionHandler();
-                }
-            }];
+            __block MultiFunctionCell *this = self;
+
+            if (IsSystemVersionOverSeven) {
+                [UIView animateWithDuration:0.4f delay:0.0f usingSpringWithDamping:1.0f initialSpringVelocity:0.0f options:UIViewAnimationOptionAllowAnimatedContent animations:^{
+                    [this initCellFrame:0];
+                } completion:^(BOOL finished) {
+                    [this.cellActionDelegate tableMenuDidHideInCell:self];
+                    if (completionHandler) {
+                        completionHandler();
+                    }
+                }];
+            } else {
+                [UIView animateWithDuration:0.2 animations:^{
+                    [self initCellFrame:0];
+                } completion:^(BOOL finished) {
+                    [self.cellActionDelegate tableMenuDidHideInCell:self];
+                    if (completionHandler) {
+                        completionHandler();
+                    }
+                }];
+            }
         }
     }
 }

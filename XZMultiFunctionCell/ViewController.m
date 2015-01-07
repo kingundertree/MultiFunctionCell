@@ -44,7 +44,7 @@
         cell = [[HomeViewCell alloc] initWithStyle:UITableViewCellStyleDefault
                                    reuseIdentifier:cellIdentify
                                containingTableView:tableView
-                                leftUtilityButtons:@[@"Left1"]
+                                leftUtilityButtons:@[@"left1"]
                                rightUtilityButtons:@[@"right1",@"right2"]];
         cell.cellActionDelegate = self.tableList;
         [cell configCell:nil index:indexPath];
