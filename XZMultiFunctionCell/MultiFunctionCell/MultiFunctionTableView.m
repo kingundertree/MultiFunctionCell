@@ -78,8 +78,8 @@
 
 - (void)cellMenuIndex:(NSIndexPath *)indexPath menuIndexNum:(NSInteger)menuIndexNum isLeftMenu:(BOOL)isLeftMenu;
 {
-    NSLog(@"你选择了第 %ld 行第 %ld 个菜单",indexPath.row+1,menuIndexNum+1);
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:[NSString stringWithFormat:@"你选择了%@第 %ld 行第 %ld 个菜单",isLeftMenu?@"左侧":@"右侧",indexPath.row+1,menuIndexNum+1] delegate:self cancelButtonTitle:nil otherButtonTitles:@"确定", nil];
+    NSLog(@"你选择了第 %d 行第 %ld 个菜单",indexPath.row+1,(long)menuIndexNum+1);
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:[NSString stringWithFormat:@"你选择了%@第 %ld 行第 %ld 个菜单",isLeftMenu?@"左侧":@"右侧",(long)(indexPath.row+1),(long)menuIndexNum+1] delegate:self cancelButtonTitle:nil otherButtonTitles:@"确定", nil];
     [alert show];
 }
 

@@ -64,10 +64,6 @@
     panGes.delaysTouchesBegan = YES;
     panGes.cancelsTouchesInView = NO;
     [self.cellContentView addGestureRecognizer:panGes];
-
-//    UITapGestureRecognizer *tapGes = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapGes:)];
-//    tapGes.numberOfTapsRequired = 1;
-//    [self.cellContentView addGestureRecognizer:tapGes];
 }
 
 - (void)setLeftMenus:(NSArray *)leftMenus{
@@ -102,6 +98,15 @@
     }
 }
 
+#pragma mark * UIPanGestureRecognizer delegate
+- (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer{
+    if ([gestureRecognizer isKindOfClass:[UIPanGestureRecognizer class]]) {
+        CGPoint translation = [(UIPanGestureRecognizer *)gestureRecognizer translationInView:self];
+        return fabs(translation.x) > fabs(translation.y);
+    }
+    return YES;
+}
+
 - (void)cellPanGes:(UIPanGestureRecognizer *)panGes{
     if (self.isMoving) {
         return;
@@ -124,24 +129,6 @@
         return;
     }
 }
-
-//- (void)tapGes:(UITapGestureRecognizer *)ges{
-//    float cellX = self.cellContentView.frame.origin.x;
-//
-//    if (cellX == 0) {
-//        return;
-//    } else {
-//        self.isMoving = YES;
-//        __block MultiFunctionCell *this = self;
-//        [UIView animateWithDuration:0.2 animations:^{
-//            this.cellContentView.frame = CGRectMake(0, 0, ScreenWidth, this.cellHeight);
-//        } completion:^(BOOL finished) {
-//            self.isMoving = NO;
-//            this.cellStauts = MultiFunctionCellTypeForNormal;
-//        }];
-//    }
-//}
-
 
 - (void)cellViewMoveToX:(float)x{
     NSLog(@"nowX-->>%f",x);

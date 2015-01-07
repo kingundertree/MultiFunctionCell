@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>F6E7DDCE-97D3-4F8F-A420-883EA0301DBE</string>
+	<key>IDESourceControlProjectName</key>
+	<string>XZMultiFunctionCell</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>B42B130DA2F3016C3314A9E28FA7DE36DAFD0031</key>
+		<string>https://github.com/kingundertree/MultiFunctionCell.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>XZMultiFunctionCell.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>B42B130DA2F3016C3314A9E28FA7DE36DAFD0031</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/kingundertree/MultiFunctionCell.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>B42B130DA2F3016C3314A9E28FA7DE36DAFD0031</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>B42B130DA2F3016C3314A9E28FA7DE36DAFD0031</string>
+			<key>IDESourceControlWCCName</key>
+			<string>XZMultiFunctionCell</string>
+		</dict>
+	</array>
+</dict>
+</plist>
