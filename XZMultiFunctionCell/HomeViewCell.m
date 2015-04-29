@@ -20,7 +20,7 @@
     lab.backgroundColor = [UIColor whiteColor];
     [self.cellContentView addSubview:lab];
 
-    lab.text = [NSString stringWithFormat:@"你好~~  %ld",(long)index.row];
+    lab.text = [NSString stringWithFormat:@"  MultiFunctionCell---->>  %ld",(long)index.row];
 }
 
 @end
