@@ -78,7 +78,10 @@
 
 - (void)cellMenuIndex:(NSIndexPath *)indexPath menuIndexNum:(NSInteger)menuIndexNum isLeftMenu:(BOOL)isLeftMenu;
 {
-//    NSLog(@"你选择了第 %ld 行第 %ld 个菜单",(long)indexPath.row+1,(long)menuIndexNum+1);
+    NSLog(@"你选择了第 %ld 行第 %ld 个菜单",(long)indexPath.row+1,(long)menuIndexNum+1);
+    if (self.multiTableDelegate && [self.multiTableDelegate respondsToSelector:@selector(returnCellMenuIndex:menuIndexNum:isLeftMenu:)]) {
+        [self.multiTableDelegate returnCellMenuIndex:indexPath menuIndexNum:menuIndexNum isLeftMenu:isLeftMenu];
+    }
 }
 
 - (void)deleteCell:(MultiFunctionCell *)cell{

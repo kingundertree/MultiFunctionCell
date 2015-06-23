@@ -10,7 +10,7 @@
 #import "MultiFunctionTableView.h"
 #import "HomeViewCell.h"
 
-@interface ViewController () <UITableViewDataSource, UITableViewDelegate>
+@interface ViewController () <UITableViewDataSource, UITableViewDelegate,MultiFunctionTableViewDelegate>
 @property (nonatomic, strong) MultiFunctionTableView *tableList;
 @end
 
@@ -23,6 +23,7 @@
     self.tableList = [[MultiFunctionTableView alloc] initWithFrame:self.view.bounds style:UITableViewStylePlain];
     self.tableList.delegate = self;
     self.tableList.dataSource = self;
+    self.tableList.multiTableDelegate = self;
     self.tableList.rowHeight = 80;
     [self.view addSubview:self.tableList];
 }
@@ -53,6 +54,12 @@
     
     return cell;
 }
+
+#pragma mark - MultiFunctionTableViewDelegate
+- (void)returnCellMenuIndex:(NSIndexPath *)indexPath menuIndexNum:(NSInteger)menuIndexNum isLeftMenu:(BOOL)isLeftMenu {
+    
+}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
