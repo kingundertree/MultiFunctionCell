@@ -18,5 +18,5 @@
 
 @property (nonatomic, assign) id<MultiFunctionTableViewDelegate> multiTableDelegate;
 - (instancetype)initWithFrame:(CGRect)frame style:(UITableViewStyle)style;
-
+- (void)hideMenuActive:(BOOL)aninated;
 @end
